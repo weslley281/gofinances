@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { HighlightCard } from '../../components/HighlightCard';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 
 import {
   Container,
@@ -31,6 +33,8 @@ export function Dashboard() {
           <Icon name="power" />
         </UserWrapper>
       </Header>
+
+      <HighlightCard />
     </Container>
   );
 }
