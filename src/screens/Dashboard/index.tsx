@@ -21,6 +21,7 @@ import {
 export function Dashboard() {
   const data = [
     {
+      type: 'positive',
       title: 'Desenvolvimento de site',
       amount: 'R$ 12.000,00',
       category: {
@@ -30,26 +31,29 @@ export function Dashboard() {
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
+      type: 'negative',
+      title: 'Dogão da Esquina',
+      amount: 'R$ 16,00',
       category: {
-        name: 'Vendas',
-        icon: 'dollar-sign',
+        name: 'Alimentação',
+        icon: 'shopping-bag',
       },
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
+      type: 'negative',
+      title: 'Garotas de sucesso - casa de massagem',
+      amount: 'R$ 160,00',
       category: {
-        name: 'Vendas',
-        icon: 'dollar-sign',
+        name: 'Lazer',
+        icon: 'shopping-bag',
       },
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
+      type: 'positive',
+      title: 'Desenvolvimento de app',
+      amount: 'R$ 18.000,00',
       category: {
         name: 'Vendas',
         icon: 'dollar-sign',
