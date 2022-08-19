@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { HighlightCard } from '../../components/HighlightCard';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { TransactionCard } from '../../components/TransactionCard';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 import {
   Container,
@@ -15,10 +15,49 @@ import {
   HighlightCards,
   Transactions,
   Title,
+  TransactionList,
 } from './styles';
-import { TransactionCard } from '../../components/TransactionCard';
 
 export function Dashboard() {
+  const data = [
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        name: 'Vendas',
+        icon: 'dollar-sign',
+      },
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        name: 'Vendas',
+        icon: 'dollar-sign',
+      },
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        name: 'Vendas',
+        icon: 'dollar-sign',
+      },
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        name: 'Vendas',
+        icon: 'dollar-sign',
+      },
+      date: '12/04/2022',
+    },
+  ];
+
   return (
     <Container>
       <Header>
@@ -62,7 +101,14 @@ export function Dashboard() {
       <Transactions>
         <Title>Lista de Transações</Title>
 
-        <TransactionCard />
+        <TransactionList
+          data={data}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: getBottomSpace(),
+          }}
+        />
       </Transactions>
     </Container>
   );
