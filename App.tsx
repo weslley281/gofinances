@@ -13,9 +13,9 @@ import {
 //themes
 import theme from './src/global/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import { Register } from './src/screens/Register';
 
-//components
-import { Dashboard } from './src/screens/Dashboard';
+//import { Dashboard } from './src/screens/Dashboard';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,7 +32,8 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Dashboard />
+        <Register />
+        {/* <Dashboard /> */}
       </ThemeProvider>
     </>
   );

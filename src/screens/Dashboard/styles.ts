@@ -52,13 +52,13 @@ export const User = styled.View`
 export const UserGreeting = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(18)}px;
-  font-family: ${({ theme }) => theme.font.regular};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const UserName = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(18)}px;
-  font-family: ${({ theme }) => theme.font.bold};
+  font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const Icon = styled(Feather)`
@@ -85,7 +85,7 @@ export const Transactions = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
-  font-family: ${({ theme }) => theme.font.bold};
+  font-family: ${({ theme }) => theme.fonts.bold};
   margin-bottom: 16px;
 `;
 

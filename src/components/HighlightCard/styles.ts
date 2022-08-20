@@ -25,7 +25,7 @@ export const Header = styled.View`
 `;
 
 export const Title = styled.Text<TypeProps>`
-  font-family: ${({ theme }) => theme.font.regular};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(14)};
 
   color: ${({ theme, type }) =>
@@ -57,7 +57,7 @@ export const Icon = styled(Feather)<TypeProps>`
 export const Footer = styled.View``;
 
 export const Amount = styled.Text<TypeProps>`
-  font-family: ${({ theme }) => theme.font.medium};
+  font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(32)}px;
 
   margin-top: 38px;
@@ -67,7 +67,7 @@ export const Amount = styled.Text<TypeProps>`
 `;
 
 export const LastTransaction = styled.Text<TypeProps>`
-  font-family: ${({ theme }) => theme.font.regular};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(12)}px;
   color: ${({ theme, type }) =>
     type === 'total' ? theme.colors.shape : theme.colors.text};
