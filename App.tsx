@@ -14,8 +14,9 @@ import {
 import theme from './src/global/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { Register } from './src/screens/Register';
+import { CategorySelect } from './src/screens/CategorySelect';
 
-//import { Dashboard } from './src/screens/Dashboard';
+import { Dashboard } from './src/screens/Dashboard';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
