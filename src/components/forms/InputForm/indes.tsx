@@ -18,7 +18,7 @@ export function InputForm({ control, name, ...rest }: Props) {
           <Input onChange={onChange} value={value} {...rest} />
         )}
         name={name}
-      ></Controller>
+      />
     </Container>
   );
 }
