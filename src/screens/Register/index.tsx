@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { InputForm } from '../../components/forms/InputForm';
 import { TransactionTypeButton } from '../../components/forms/TransactionTypeButton';
 import { CategorySelect } from '../CategorySelect';
+import uuid from 'react-native-uuid';
+import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   Fields,
@@ -25,6 +27,10 @@ interface FormData {
   name: string;
   amount: number;
 }
+
+type NavigationProps = {
+  navigate: (screen: string) => void;
+};
 
 const schema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
@@ -45,9 +51,12 @@ export function Register() {
     name: 'Categoria',
   });
 
+  const navigation = useNavigation<NavigationProps>();
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -73,17 +82,35 @@ export function Register() {
       return Alert.alert('Selecione a categoria');
     }
 
-    const data = {
+    const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
       category: category.key,
+      date: new Date(),
     };
-    console.log(data);
+    // console.log(newTransaction);
 
     try {
-      await AsyncStorage.setItem(datakey, JSON.stringify(data));
+      const data = await AsyncStorage.getItem(datakey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [...currentData, newTransaction];
+
+      await AsyncStorage.setItem(datakey, JSON.stringify(dataFormatted));
+
+      //reset all
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria',
+      });
+
       Alert.alert('Salvo com sucesso');
+
+      navigation.navigate('Listagem');
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possivel salvar');
@@ -94,10 +121,14 @@ export function Register() {
     async function loadData() {
       const data = await AsyncStorage.getItem(datakey);
 
-      console.log(JSON.parse(data));
+      console.log(JSON.parse(data!));
     }
 
     loadData();
+    // async function removeAll() {
+    //   AsyncStorage.removeItem(datakey);
+    // }
+    // removeAll();
   }, []);
 
   return (
