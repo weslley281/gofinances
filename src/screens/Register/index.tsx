@@ -44,7 +44,6 @@ const schema = yup.object().shape({
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [cagoryModalOpen, setCagoryModalOpen] = useState(false);
-  const datakey = '@gofinances:transactions';
 
   const [category, setCategory] = useState({
     key: 'category',
@@ -73,6 +72,7 @@ export function Register() {
   function handleCloseSelectCategoryModal() {
     setCagoryModalOpen(false);
   }
+  const datakey = '@gofinances:transactions';
 
   async function handleRegister(form: FormData) {
     if (!transactionType) {
@@ -109,7 +109,7 @@ export function Register() {
       });
 
       Alert.alert('Salvo com sucesso');
-
+      console.log(currentData);
       navigation.navigate('Listagem');
     } catch (error) {
       console.log(error);
@@ -117,19 +117,14 @@ export function Register() {
     }
   }
 
-  useEffect(() => {
-    async function loadData() {
-      const data = await AsyncStorage.getItem(datakey);
-
-      console.log(JSON.parse(data!));
-    }
-
-    loadData();
-    // async function removeAll() {
-    //   AsyncStorage.removeItem(datakey);
-    // }
-    // removeAll();
-  }, []);
+  //já tentei limpar os dados
+  // useEffect(() => {
+  //   async function removeAll() {
+  //     await AsyncStorage.removeItem(datakey);
+  //     console.log(JSON.parse(datakey!));
+  //   }
+  //   removeAll();
+  // }, []);
 
   return (
     <TouchableWithoutFeedback
