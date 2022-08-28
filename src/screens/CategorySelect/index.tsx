@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { FlatList } from 'react-native';
 import {
   Category,
@@ -10,6 +11,7 @@ import {
   Separator,
   Title,
 } from './styles';
+
 import { categories } from '../../utils/categories';
 import { Button } from '../../components/forms/Button';
 

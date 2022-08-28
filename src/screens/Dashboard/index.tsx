@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { HighlightCard } from '../../components/HighlightCard';
+import { useFocusEffect } from '@react-navigation/native';
+
 import {
   TransactionCard,
   TransactionCardProps,
 } from '../../components/TransactionCard';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   Container,
@@ -63,9 +66,17 @@ export function Dashboard() {
     setData(transactionsFormatted);
   }
 
+  //fetches transactions at the moment the application loads
   useEffect(() => {
     loadTransactions();
   }, []);
+
+  //fetches transactions when the application is loaded
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactions();
+    }, [])
+  );
 
   return (
     <Container>

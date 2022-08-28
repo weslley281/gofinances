@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
+import * as yup from 'yup';
+
 import { useForm } from 'react-hook-form';
 import { Modal, Keyboard, Alert } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
+import { useNavigation } from '@react-navigation/native';
 import { Button } from '../../components/forms/Button';
 import { CategorySelectButton } from '../../components/forms/CategorySelectButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { InputForm } from '../../components/forms/InputForm';
 import { TransactionTypeButton } from '../../components/forms/TransactionTypeButton';
 import { CategorySelect } from '../CategorySelect';
-import uuid from 'react-native-uuid';
-import { useNavigation } from '@react-navigation/native';
+
 import {
   Container,
   Fields,
@@ -18,8 +22,6 @@ import {
   Title,
   TransactionsTypes,
 } from './styles';
-
-import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -61,7 +63,7 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  function handleTransactionsTypeSelect(type: 'up' | 'down') {
+  function handleTransactionsTypeSelect(type: 'positive' | 'negative') {
     setTransactionType(type);
   }
 
@@ -86,7 +88,7 @@ export function Register() {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
       date: new Date(),
     };
@@ -160,14 +162,15 @@ export function Register() {
               <TransactionTypeButton
                 type="up"
                 title="Entradas"
-                onPress={() => handleTransactionsTypeSelect('up')}
-                isActive={transactionType === 'up'}
+                onPress={() => handleTransactionsTypeSelect('positive')}
+                isActive={transactionType === 'positive'}
               />
+
               <TransactionTypeButton
                 type="down"
                 title="Saídas"
-                onPress={() => handleTransactionsTypeSelect('down')}
-                isActive={transactionType === 'down'}
+                onPress={() => handleTransactionsTypeSelect('negative')}
+                isActive={transactionType === 'negative'}
               />
             </TransactionsTypes>
 
