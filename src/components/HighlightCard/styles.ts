@@ -26,14 +26,14 @@ export const Header = styled.View`
 
 export const Title = styled.Text<TypeProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: ${RFValue(14)};
+  font-size: ${RFValue(14)}px;
 
   color: ${({ theme, type }) =>
     type === 'total' ? theme.colors.shape : theme.colors.text_dark};
 `;
 
 export const Icon = styled(Feather)<TypeProps>`
-  font-size: ${RFValue(40)};
+  font-size: ${RFValue(40)}px;
 
   ${({ type }) =>
     type === 'up' &&
