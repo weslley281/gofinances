@@ -174,12 +174,12 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo />
-                <User
+                <Photo
                   source={{
                     uri: 'https://avatars.githubusercontent.com/u/65488214?v=4',
                   }}
-                >
+                />
+                <User>
                   <UserGreeting>Olá, </UserGreeting>
                   <UserName>Weslley</UserName>
                 </User>

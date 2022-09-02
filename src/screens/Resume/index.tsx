@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { VictoryPie } from 'victory-native';
@@ -23,6 +23,7 @@ import {
   Title,
 } from './styles';
 import { categories } from '../../utils/categories';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface TransactionData {
   type: 'positive' | 'negative';
@@ -42,7 +43,7 @@ interface CategoryData {
 }
 
 export function Resume() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -53,7 +54,6 @@ export function Resume() {
   const theme = useTheme();
 
   function handleDateChange(action: 'next' | 'prev') {
-    setIsLoading(true);
     if (action === 'next') {
       setSelectedDate(addMonths(selectedDate, 1));
     } else {
@@ -62,6 +62,7 @@ export function Resume() {
   }
 
   async function loadData() {
+    setIsLoading(true);
     const dataKey = '@gofinances:transactions';
     const response = await AsyncStorage.getItem(dataKey);
     const responseFormatted = response ? JSON.parse(response) : [];
@@ -117,9 +118,11 @@ export function Resume() {
     setIsLoading(false);
   }
 
-  useEffect(() => {
-    loadData();
-  }, [selectedDate]);
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [selectedDate])
+  );
 
   return (
     <Container>
@@ -134,7 +137,6 @@ export function Resume() {
         <Content
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            flex: 1,
             paddingHorizontal: 24,
             paddingBottom: useBottomTabBarHeight(),
           }}
