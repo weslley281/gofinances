@@ -19,6 +19,8 @@ import theme from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 import { StatusBar } from 'react-native';
 
+import { Signin } from './src/screens/Signin';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -36,7 +38,8 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <StatusBar barStyle="light-content" />
-          <AppRoutes />
+          <Signin />
+          {/* <AppRoutes /> */}
         </NavigationContainer>
       </ThemeProvider>
     </GestureHandlerRootView>
