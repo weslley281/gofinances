@@ -41,3 +41,9 @@ export const Footer = styled.View`
   width: 100%;
   height: 30%;
 `;
+
+export const FooterWrapper = styled.View`
+  margin-top: ${RFValue(-4)}px;
+  padding: 0 32px;
+  justify-content: space-between;
+`;
