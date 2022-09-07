@@ -5,10 +5,11 @@ import styled from 'styled-components/native';
 export const Button = styled(RectButton)`
   height: ${RFValue(56)}px;
   background-color: ${({ theme }) => theme.colors.shape};
+  border-radius: 5px;
   align-items: center;
   flex-direction: row;
+
   margin-bottom: 16px;
-  border-radius: 5px;
 `;
 
 export const ImageContainer = styled.View`

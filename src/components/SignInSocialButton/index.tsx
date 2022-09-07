@@ -14,7 +14,6 @@ export function SignInSocialButton({ title, svg: Svg, ...rest }: Props) {
       <ImageContainer>
         <Svg />
       </ImageContainer>
-
       <Text>{title}</Text>
     </Button>
   );
