@@ -60,6 +60,14 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function sgignInWithApple() {
+    try {
+      const credential = await AppleAuthentication.signInAsync;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
