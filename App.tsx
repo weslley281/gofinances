@@ -17,9 +17,10 @@ import {
 
 import theme from './src/global/styles/theme';
 import { StatusBar } from 'react-native';
-import { AuthProvider } from './src/hooks/auth';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
+  const { userStorageLoading } = useAuth();
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -27,7 +28,7 @@ export default function App() {
   });
 
   //esperada até as fontes serem todas carregadas
-  if (!fontsLoaded) {
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />;
   }
 

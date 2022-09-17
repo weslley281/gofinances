@@ -27,6 +27,8 @@ interface IAuthContextData {
   user: User;
   signInWithGoogle(): Promise<void>;
   sgignInWithApple(): Promise<void>;
+  signOut(): Promise<void>;
+  userStorageLoading: boolean;
 }
 
 interface AuthorizationsResponce {
@@ -102,6 +104,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signOut() {
     setUser({} as User);
+    await AsyncStorage.removeItem(userSorageKey);
   }
 
   useEffect(() => {
@@ -123,6 +126,8 @@ function AuthProvider({ children }: AuthProviderProps) {
         user,
         signInWithGoogle,
         sgignInWithApple,
+        signOut,
+        userStorageLoading,
       }}
     >
       {children}
