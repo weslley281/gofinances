@@ -26,7 +26,7 @@ interface User {
 interface IAuthContextData {
   user: User;
   signInWithGoogle(): Promise<void>;
-  sgignInWithApple(): Promise<void>;
+  signInWithApple(): Promise<void>;
   signOut(): Promise<void>;
   userStorageLoading: boolean;
 }
@@ -77,7 +77,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function sgignInWithApple() {
+  async function signInWithApple() {
     try {
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -125,7 +125,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       value={{
         user,
         signInWithGoogle,
-        sgignInWithApple,
+        signInWithApple,
         signOut,
         userStorageLoading,
       }}
