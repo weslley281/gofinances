@@ -24,6 +24,7 @@ import {
 } from './styles';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuth } from '../../hooks/auth';
 
 interface FormData {
   name: string;
@@ -46,6 +47,8 @@ const schema = yup.object().shape({
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [cagoryModalOpen, setCagoryModalOpen] = useState(false);
+
+  const { user } = useAuth();
 
   const [category, setCategory] = useState({
     key: 'category',
@@ -74,7 +77,7 @@ export function Register() {
   function handleCloseSelectCategoryModal() {
     setCagoryModalOpen(false);
   }
-  const datakey = '@gofinances:transactions';
+  const datakey = `@gofinances:transactions_user:${user.id}`;
 
   async function handleRegister(form: FormData) {
     if (!transactionType) {
