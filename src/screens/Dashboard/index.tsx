@@ -46,14 +46,13 @@ interface HighLightData {
 }
 
 export function Dashboard() {
-  const { signOut } = useAuth();
+  const theme = useTheme();
+  const { signOut, user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>();
   const [highLightData, setHighLightData] = useState<HighLightData>(
     {} as HighLightData
   );
-
-  const theme = useTheme();
 
   function getLastTransactionDate(
     collection: DataListProps[],
@@ -178,12 +177,12 @@ export function Dashboard() {
               <UserInfo>
                 <Photo
                   source={{
-                    uri: 'https://avatars.githubusercontent.com/u/65488214?v=4',
+                    uri: user.photo,
                   }}
                 />
                 <User>
                   <UserGreeting>Olá, </UserGreeting>
-                  <UserName>Weslley</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
 

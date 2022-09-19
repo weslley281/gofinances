@@ -10,7 +10,7 @@ import * as AuthSession from 'expo-auth-session';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const { REDIRECT_URI } = process.env;
+const REDIRECT_URI = 'https://auth.expo.io/@weslley.ferraz/gofinances';
 const { CLIENT_ID } = process.env;
 
 interface AuthProviderProps {
@@ -95,7 +95,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       if (credential) {
         const name = credential.fullName?.givenName!;
-        const photo = `https://ui-avatars.com/api/?name=${name}&lenght=1`;
+        const photo = `https://ui-avatars.com/api/?name=${name}&lenght=1&bold=true`;
 
         const userLogged = {
           id: String(credential.user),
