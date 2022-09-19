@@ -30,8 +30,6 @@ import {
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 
-const { signOut } = useAuth();
-
 export interface DataListProps extends TransactionCardProps {
   id: string;
 }
@@ -48,6 +46,7 @@ interface HighLightData {
 }
 
 export function Dashboard() {
+  const { signOut } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>();
   const [highLightData, setHighLightData] = useState<HighLightData>(
