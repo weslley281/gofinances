@@ -58,24 +58,34 @@ export function Dashboard() {
     collection: DataListProps[],
     type: 'positive' | 'negative'
   ) {
-    const lastTransaction = Math.max.apply(
-      Math,
-      collection
-        .filter((transaction) => transaction.type === type)
-        .map((transaction) => new Date(transaction.date).getTime())
+    const collectionFilttered = collection.filter(
+      (transaction) => transaction.type === type
     );
 
-    return Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit',
-      weekday: 'long',
-      month: 'long',
-      year: 'numeric',
-    }).format(new Date(lastTransaction));
+    if (collectionFilttered.length === 0) {
+      return 0;
+    }
+
+    const lastTransaction = new Date(
+      Math.max.apply(
+        Math,
+        collectionFilttered.map((transaction) =>
+          new Date(transaction.date).getTime()
+        )
+      )
+    );
+
+    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString(
+      'pt-BR',
+      {
+        month: 'long',
+      }
+    )}`;
   }
 
   async function loadTransactions() {
-    const datakey = `@gofinances:transactions_user:${user.id}`;
-    const response = await AsyncStorage.getItem(datakey);
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
+    const response = await AsyncStorage.getItem(dataKey);
     const transactions = response ? JSON.parse(response) : [];
 
     let entriesTotal = 0;
@@ -123,7 +133,10 @@ export function Dashboard() {
       transactions,
       'negative'
     );
-    const totalInterval = `01 a ${lastTransactionExpensives}`;
+    const totalInterval =
+      lastTransactionExpensives === 0
+        ? 'Não há transações'
+        : `01 a ${lastTransactionExpensives}`;
 
     setHighLightData({
       entries: {
@@ -131,14 +144,20 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL',
         }),
-        lastTransaction: `Ultima transação em ${lastTransactionEntries}`,
+        lastTransaction:
+          lastTransactionEntries === 0
+            ? 'Não há transações'
+            : `Ultima transação em ${lastTransactionEntries}`,
       },
       expensives: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
         }),
-        lastTransaction: `Ultima transação em ${lastTransactionExpensives}`,
+        lastTransaction:
+          lastTransactionEntries === 0
+            ? 'Não há transações'
+            : `Ultima transação em ${lastTransactionExpensives}`,
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
